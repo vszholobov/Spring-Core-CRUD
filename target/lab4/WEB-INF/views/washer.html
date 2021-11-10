@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    label {
+        display: block;
+    }
+
+    #data {
+        border: 1px solid black;
+        width: 305px;
+        margin: 0px auto;
+        padding: 5px 0px;
+    }
+
+    #formHolder {
+        display: flex;
+        flex-direction: row;
+        padding-top: 5px;
+    }
+
+    #data input, #data label {
+        margin-left: 5px;
+    }
+
+    #buttons {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+    }
+</style>
+<a th:href="@{/}"> home </a>
+<div th:if="${error != null}">
+    <span th:text="${error}"></span>
+</div>
+<div id="data" th:if="${error == null}">
+    <div style="border-bottom: 1px solid black;padding-bottom: 5px;" th:object="${washer}">
+        <label for="id">id: </label>
+        <input form="updateForm" type="text" th:required="required" th:field="*{id}" id="id"
+                                           readonly="readonly"/>
+    </div>
+    <div id="formHolder">
+        <div>
+            <form id="updateForm" th:method="POST" th:action="@{/update}" th:object="${washer}">
+                <label for="weight">weight: </label>
+                <input type="number" th:required="required" th:field="*{weight}" id="weight"/>
+                <label for="volume">volume: </label>
+                <input type="number" th:required="required" th:field="*{volume}" id="volume"/>
+                <label for="brand">brand: </label>
+                <input type="text" th:required="required" th:field="*{brand}" id="brand"/>
+                <label for="ownerName">ownerName: </label>
+                <input type="text" th:required="required" th:field="*{ownerName}"
+                                                                 id="ownerName"/>
+                <label for="password">password: </label>
+                <input type="text" th:required="required" th:field="*{password}"
+                                                               id="password"/>
+            </form>
+            <form id="deleteForm" th:method="POST" th:action="@{/delete}" th:object="${washer}">
+                <input type="text" th:required="required" th:field="*{id}" id="deleteId" readonly="readonly" hidden="hidden"/>
+            </form>
+        </div>
+        <div sec:authorize="hasAuthority('ADMIN')" style="position: relative;">
+            <div id="buttons">
+                <input type="submit" form="updateForm" value="Update" style="background: blue; color: white;">
+                <input type="submit" form="deleteForm" value="Delete" style="background: red; color: white;">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/}"> home </a>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <a th:href="@{/add}"> add </a>
+</div>
+
+<table style="border: 1px solid black; border-collapse: collapse">
+    <thead>
+        <tr>
+            <th style="border: 1px solid black;"> Id </th>
+            <th style="border: 1px solid black;"> Weight </th>
+            <th style="border: 1px solid black;"> Volume </th>
+            <th style="border: 1px solid black;"> Brand </th>
+            <th style="border: 1px solid black;"> Owner </th>
+            <th style="border: 1px solid black;"> Password </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="washer : ${washers}">
+            <td style="border: 1px solid black;"><a th:href="@{/show/{id}(id=${washer.id})}" th:text="${washer.id}"></a></td>
+            <td style="border: 1px solid black;"><span th:text="${washer.weight}"></span></td>
+            <td style="border: 1px solid black;"><span th:text="${washer.volume}"></span></td>
+            <td style="border: 1px solid black;"><span th:text="${washer.brand}"></span></td>
+            <td style="border: 1px solid black;"><span th:text="${washer.ownerName}"></span></td>
+            <td style="border: 1px solid black;"><span th:text="${washer.password}"></span></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

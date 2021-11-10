@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/}"> home </a>
+<form th:method="POST" th:action="@{/add}" th:object="${washer}">
+    <div>
+        <label for="weight">weight: </label>
+        <br>
+        <input type="number" th:required="required" th:field="*{weight}" id="weight"/>
+    </div>
+    <div>
+        <label for="volume">volume: </label>
+        <br>
+        <input type="number" th:required="required" th:field="*{volume}" id="volume"/>
+    </div>
+    <div>
+        <label for="brand">brand: </label>
+        <br>
+        <input type="text" th:required="required" th:field="*{brand}" id="brand"/>
+    </div>
+    <div>
+        <label for="ownerName">owner: </label>
+        <br>
+        <input type="text" th:required="required" th:field="*{ownerName}" id="ownerName"/>
+    </div>
+    <div>
+        <label for="password">password: </label>
+        <br>
+        <input type="text" th:required="required" th:field="*{password}" id="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Send"/>
+    </div>
+</form>
+</body>
+</html>
